@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>spa example</title>
+    <link rel="stylesheet" href="assets/layout.css">
+  </head>
+
+  <body>
+
+    <!-- APPLICATION LAYOUT -->
+    <layout>
+      <section spa-placeholder id="header"></section>
+      <section spa-placeholder id="main"></section>
+      <section spa-placeholder id="picture-strip"></section>
+    </layout>
+
+    <!-- DEPENDENCIES -->
+    <script src="vendor/spa.js"></script>
+
+    <!-- COMPONENTS -->
+    <script src="components/header.js"></script>
+    <script src="components/picture-strip.js"></script>
+    <script src="components/application.js" autoload></script>
+
+  </body>
+
+</html>

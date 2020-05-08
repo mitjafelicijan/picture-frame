@@ -24,3 +24,5 @@ ngrok http 3000
 ## Resources
 
 - https://www.tutorialspoint.com/webrtc/index.htm
+- https://blog.bitsrc.io/use-webrtc-and-peerjs-to-build-an-image-sharing-app-f8163b6a6266
+- https://morioh.com/p/eda8d6fc06bf
