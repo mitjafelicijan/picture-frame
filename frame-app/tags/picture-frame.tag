@@ -14,10 +14,12 @@
     export default {
       async onMounted() {
         let pictures = await db.pictures.toArray();
-        this.update({
-          pictures: pictures,
-          featured: pictures[0].blob || null,
-        });
+        if (pictures.length > 0) {
+          this.update({
+            pictures: pictures,
+            featured: pictures[0].blob || null,
+          });
+        }
       },
 
       async showFullImage(evt) {

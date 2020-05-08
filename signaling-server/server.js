@@ -3,15 +3,11 @@ const express = require('express');
 const peer= require('peer');
 const chalk = require('chalk');
 const datastore = require('nedb');
+const cors = require('cors');
 
 // database for storing unique device ids
 const db = new datastore(path.join(__dirname, 'devices.db'));
 db.loadDatabase();
-
-// used for easier development - livereloads browser on changes
-require('livereload')
-  .createServer({ delay: 500, exts: [ 'js', 'tag', 'css', 'html' ] })
-  .watch(__dirname);
 
 const app = express();
 const port = 3000 || process.env.PORT;
@@ -26,6 +22,7 @@ const peerServer = peer.ExpressPeerServer(httpServer, {
   path: '/'
 });
 
+app.use(cors());
 app.use('/rtc', peerServer);
 
 app.get('/generate-device-id', async (req, res) => {

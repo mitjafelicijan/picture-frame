@@ -14,7 +14,7 @@
       },
 
       async goToPictureFrame() {
-        route.router.push('/apps/frame/#/picture-frame');
+        route.router.push('#/picture-frame');
       },
     }
   </script>

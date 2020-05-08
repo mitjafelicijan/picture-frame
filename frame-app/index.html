@@ -5,30 +5,23 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Frame</title>
-    <link rel="stylesheet" href="assets/reset.css">
+    <link rel="stylesheet" href="/assets/reset.css">
   </head>
 
   <body>
 
     <app></app>
 
-    <script src="tags/application.tag" type="riot"></script>
-    <script src="tags/picture-frame.tag" type="riot"></script>
-    <script src="tags/pairing.tag" type="riot"></script>
+    <script src="/tags/application.tag" type="riot"></script>
+    <script src="/tags/picture-frame.tag" type="riot"></script>
+    <script src="/tags/pairing.tag" type="riot"></script>
 
     <script src="https://unpkg.com/peerjs@1.2.0/dist/peerjs.min.js"></script>
     <script src="https://unpkg.com/dexie@3.0.1/dist/dexie.js"></script>
     <script src="https://unpkg.com/riot@4.12.2/riot+compiler.min.js"></script>
     <script src="https://unpkg.com/@riotjs/route@5.3.2/route.js"></script>
 
-    <script src="assets/app.js"></script>
-
-    <!-- livereload for faster development -->
-    <script>
-      const livereload = document.createElement('script');
-      livereload.src = `http://${(location.host || 'localhost').split(':')[0]}:35729/livereload.js?snipver=1`;
-      document.body.append(livereload)
-    </script>
+    <script src="/assets/app.js"></script>
 
   </body>
 
