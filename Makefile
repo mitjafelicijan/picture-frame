@@ -1,7 +1,6 @@
 MAKEFLAGS += -j3
 
 default:
-	@echo "Helper targets"
 	@echo "Try 'make dev'"
 
 run-signaling-server:
