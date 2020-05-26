@@ -3,6 +3,11 @@
   package="com.example.tablet">
 
   <uses-permission android:name="android.permission.INTERNET"/>
+  <uses-permission android:name="android.permission.RECORD_AUDIO" />
+  <uses-permission android:name="android.permission.CAMERA" />
+  <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
+
+  <uses-feature android:name="android.hardware.camera"  android:required="true" />
 
   <application
     android:allowBackup="true"
@@ -17,8 +22,8 @@
         <action android:name="android.intent.action.MAIN" />
 
         <!-- launcher settings start -->
-        <category android:name="android.intent.category.HOME" />
-        <category android:name="android.intent.category.DEFAULT" />
+        <!-- <category android:name="android.intent.category.HOME" />
+        <category android:name="android.intent.category.DEFAULT" />-->
         <!-- launcher settings end -->
 
         <category android:name="android.intent.category.LAUNCHER" />

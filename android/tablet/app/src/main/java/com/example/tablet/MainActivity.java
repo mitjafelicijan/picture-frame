@@ -5,12 +5,16 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.res.Configuration;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.webkit.PermissionRequest;
+import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
+import android.webkit.WebViewClient;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -20,11 +24,19 @@ public class MainActivity extends AppCompatActivity {
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
 
+    // https://www.apkmirror.com/apk/google-inc/android-system-webview/android-system-webview-83-0-4103-60-release/android-system-webview-83-0-4103-60-2-android-apk-download/download/
+    // enables remote debugging of webview with devtools
+    // open chrome and chrome://inspect/#devices and inspect webview
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+      WebView.setWebContentsDebuggingEnabled(true);
+    }
+
+
     // hides title bar
     getSupportActionBar().hide();
 
     // hides navigation
-    getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_HIDE_NAVIGATION);
+    // getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_HIDE_NAVIGATION);
 
     setContentView(R.layout.activity_main);
 
@@ -36,7 +48,7 @@ public class MainActivity extends AppCompatActivity {
   public void onWindowFocusChanged(boolean hasFocus) {
     super.onWindowFocusChanged(hasFocus);
     if (hasFocus) {
-      hideSystemUI();
+      //hideSystemUI();
     }
   }
 
@@ -60,11 +72,34 @@ public class MainActivity extends AppCompatActivity {
   }
 
   private void loadSPAIntoWebView () {
+
     frameWebView = new WebView(this);
-    frameWebView.loadUrl("https://html5test.com/");
+    //frameWebView.loadUrl("https://html5test.com/");
+    frameWebView.loadUrl("https://2bf2a6ca.ngrok.io");
+
+    // dirty fix so webview doesn't open Chrome on refresh
+    frameWebView.setWebViewClient(new WebViewClient());
+
+    // accepts permissions for video
+    frameWebView.setWebChromeClient(new WebChromeClient() {
+      @Override
+      public void onPermissionRequest(final PermissionRequest request) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+          request.grant(request.getResources());
+        }
+      }
+    });
 
     WebSettings frameWebViewSettings = frameWebView.getSettings();
     frameWebViewSettings.setJavaScriptEnabled(true);
+    frameWebViewSettings.setDomStorageEnabled(true);
+    frameWebViewSettings.setSaveFormData(true);
+    frameWebViewSettings.setSupportZoom(false);
+    frameWebViewSettings.setCacheMode(WebSettings.LOAD_NO_CACHE);
+    frameWebViewSettings.setPluginState(WebSettings.PluginState.ON);
+    frameWebViewSettings.setUseWideViewPort(true);
+    frameWebViewSettings.setLoadWithOverviewMode(true);
+    frameWebViewSettings.setMediaPlaybackRequiresUserGesture(false);
 
     setContentView(frameWebView);
   }
