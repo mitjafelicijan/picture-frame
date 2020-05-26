@@ -8,7 +8,7 @@
 
 Requires Node.JS 10.x or greater.
 
-```sh
+```bash
 # install dependencies
 cd signaling server && npm install && sudo npm i -G http-server
 
@@ -22,8 +22,14 @@ make dev
 
 ## Android
 
-1. Download latest [WebView](https://www.apkmirror.com/apk/google-inc/android-system-webview/android-system-webview-83-0-4103-60-release/android-system-webview-83-0-4103-60-2-android-apk-download/download/) and install APK on Tablet.
-2. Install tablet.apk on tablet and when you run it first then select tablet as default launcher.
+1. Download latest [WebView 83 beta](https://www.apkmirror.com/apk/google-inc/android-system-webview/android-system-webview-83-0-4103-60-release/android-system-webview-83-0-4103-60-2-android-apk-download/download/) and install APK on Tablet.
+2. Install `tablet.apk` on tablet and when you run it first then select tablet as default launcher.
+
+
+### WebView versions
+
+- [WebView 83 beta (APK)](https://www.apkmirror.com/apk/google-inc/android-system-webview/android-system-webview-83-0-4103-60-release/android-system-webview-83-0-4103-60-2-android-apk-download/download/)
+- [WebView 80 stable (APK)](https://www.apkmirror.com/apk/google-inc/android-system-webview/android-system-webview-81-0-4044-138-release/android-system-webview-81-0-4044-138-2-android-apk-download/)
 
 
 ## Resources
