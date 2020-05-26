@@ -1,8 +1,10 @@
-const remoteDeviceID = 'somedeviceid';
+const remoteDeviceID = 'WB3Cip6bpMrvCx06';
 
 const peer = new Peer({
-  host: window.location.hostname,
-  port: window.location.port,
+  // host: window.location.hostname,
+  // port: window.location.port,
+  host: 'localhost',
+  port: 3000,
   path: '/rtc/',
   secure: (window.location.hostname !== 'localhost') || false, // require ssl only if not localhost
 })

@@ -16,7 +16,7 @@
         let pictures = await db.pictures.toArray();
         if (pictures.length > 0) {
           this.update({
-            pictures: pictures,
+            pictures: pictures.reverse(),
             featured: pictures[0].blob || null,
           });
         }
