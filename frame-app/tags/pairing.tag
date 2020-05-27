@@ -1,16 +1,20 @@
 <pairing>
 
   <div>
-    <p>Pairing code</p>
-    <h1>{ state.deviceID }</h1>
-    <button onclick="{ goToPictureFrame }">Load picture frame</button>
+    <h3>Pairing code</h3>
+    <div id="qrcode"></div>
+    <p>
+      <button onclick="{ goToPictureFrame }">Open settings</button>
+      <button onclick="{ goToPictureFrame }">Load picture frame</button>
+    </p>
   </div>
 
   <script>
     export default {
       async onMounted() {
         const deviceID = await db.config.where('key').equals('deviceID').toArray();
-        this.update({ deviceID: deviceID[0].value });
+        new QRCode(document.getElementById("qrcode"), deviceID[0].value);
+        //this.update({ deviceID: deviceID[0].value });
       },
 
       async goToPictureFrame() {
@@ -32,17 +36,26 @@
       text-align: center;
     }
 
-    h1 {
-      font-size: xx-large;
-      margin: 50px 20px;
+    h3 {
+      font-size: x-large;
     }
 
     button {
-      color: black;
+      color: white;
       font-weight: bold;
       background: gray;
       padding: 20px 30px;
       border-radius: 5px;
+      margin: 0 10px;
+    }
+
+    #qrcode {
+      border: 20px solid white;
+      background: white;
+      width: fit-content;
+      display: inline-block;
+      margin-top: 20px;
+      margin-bottom: 20px;
     }
   </style>
 

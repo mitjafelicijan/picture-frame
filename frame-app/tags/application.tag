@@ -33,6 +33,8 @@
           route.router.push('#/picture-frame');
         }
 
+        route.router.push('#/pairing');
+
         window.peer = new Peer(deviceID, {
           host: signalingServerHost,
           port: signalingServerPort,
