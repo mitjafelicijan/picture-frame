@@ -15,6 +15,9 @@ cd signaling server && npm install && sudo npm i -G http-server
 
 # starts stack
 make dev
+
+# using ngrok
+ngrok http --subdomain=pictureframe 3000
 ```
 
 - Signaling server (http://localhost:3000)
