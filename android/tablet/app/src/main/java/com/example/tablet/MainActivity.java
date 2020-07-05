@@ -36,7 +36,7 @@ public class MainActivity extends AppCompatActivity {
     getSupportActionBar().hide();
 
     // hides navigation
-    // getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_HIDE_NAVIGATION);
+    getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_HIDE_NAVIGATION);
 
     setContentView(R.layout.activity_main);
 
@@ -48,7 +48,7 @@ public class MainActivity extends AppCompatActivity {
   public void onWindowFocusChanged(boolean hasFocus) {
     super.onWindowFocusChanged(hasFocus);
     if (hasFocus) {
-      //hideSystemUI();
+      hideSystemUI();
     }
   }
 
@@ -75,7 +75,7 @@ public class MainActivity extends AppCompatActivity {
 
     frameWebView = new WebView(this);
     //frameWebView.loadUrl("https://html5test.com/");
-    frameWebView.loadUrl("https://2bf2a6ca.ngrok.io");
+    frameWebView.loadUrl("https://pictureframe.ngrok.io");
 
     // dirty fix so webview doesn't open Chrome on refresh
     frameWebView.setWebViewClient(new WebViewClient());

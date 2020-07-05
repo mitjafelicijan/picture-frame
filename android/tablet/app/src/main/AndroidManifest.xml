@@ -22,8 +22,8 @@
         <action android:name="android.intent.action.MAIN" />
 
         <!-- launcher settings start -->
-        <!-- <category android:name="android.intent.category.HOME" />
-        <category android:name="android.intent.category.DEFAULT" />-->
+        <category android:name="android.intent.category.HOME" />
+        <category android:name="android.intent.category.DEFAULT" />
         <!-- launcher settings end -->
 
         <category android:name="android.intent.category.LAUNCHER" />
