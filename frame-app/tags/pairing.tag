@@ -4,7 +4,7 @@
     <h3>Pairing code</h3>
     <div id="qrcode"></div>
     <p>
-      <button onclick="{ goToPictureFrame }">Open settings</button>
+      <!--<button onclick="{ goToPictureFrame }">Open settings</button>-->
       <button onclick="{ goToPictureFrame }">Load picture frame</button>
     </p>
   </div>
@@ -12,13 +12,11 @@
   <script>
     export default {
       async onMounted() {
-        const deviceID = await db.config.where('key').equals('deviceID').toArray();
-        new QRCode(document.getElementById("qrcode"), deviceID[0].value);
-        //this.update({ deviceID: deviceID[0].value });
+        new QRCode(document.getElementById('qrcode'), window.deviceID);
       },
 
       async goToPictureFrame() {
-        route.router.push('#/picture-frame');
+        route.router.push(`${pathPrefix}#/picture-frame`);
       },
     }
   </script>

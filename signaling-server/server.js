@@ -36,8 +36,10 @@ app.get('/generate-device-id', async (req, res) => {
 
 app.get('/', async (req, res) => {
   res.send(`
-    <li><a href="/apps/frame/">frame</li>
-    <li><a href="/apps/remote/">remote</li>
+  <style>* {font-size: 50px}</style>
+    <li><a href="/apps/frame/#/">frame</li>
+    <li><a href="/apps/frame/#/pairing">frame paring</li>
+    <li><a href="/apps/remote/#/">remote</li>
   `);
 });
 

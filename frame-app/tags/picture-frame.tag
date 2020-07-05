@@ -11,6 +11,7 @@
   </main>
 
   <script>
+
     export default {
       async loadImageStripFromDatabase() {
         let pictures = await db.pictures.toArray();
@@ -24,6 +25,26 @@
 
       async onMounted() {
         this.loadImageStripFromDatabase();
+        const existingDeviceID = await db.config.where('key').equals('deviceID').toArray();
+        deviceID = existingDeviceID[0].value;
+
+        window.peer.on('connection', async (conn) => {
+          conn.on('data', async (data) => {
+            if (data.filetype.includes('image')) {
+              console.log('==>', data)
+
+              await db.pictures.add({
+                filename: data.filename,
+                blob: data.blob,
+                date: new Date(),
+              });
+
+              //route.router.push(`${pathPrefix}#/picture-frame`);
+
+              this.loadImageStripFromDatabase();
+            }
+          });
+        });
       },
 
       async onUpdated(props, state) {
@@ -33,7 +54,6 @@
 
       async showFullImage(evt) {
         this.update({ featured: evt.target.src });
-
         //this.picture.blob = evt.target.src
       },
     }

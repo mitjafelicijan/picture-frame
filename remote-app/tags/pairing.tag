@@ -22,11 +22,13 @@
           const imageFile = e.target.files[0];
           html5QrCode.scanFile(imageFile, /* showImage= */true)
             .then(qrCodeMessage => {
+
               db.config.add({
                 key: 'remoteDeviceID',
                 value: qrCodeMessage,
               });
 
+              window.remoteDeviceID = qrCodeMessage;
               alert(qrCodeMessage);
               route.router.push(`${pathPrefix}#/control`);
             })
