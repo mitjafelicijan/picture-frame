@@ -12,4 +12,6 @@ run-frame-app:
 run-remote-app:
 	cd remote-app && http-server -p 3002
 
-dev: run-signaling-server run-frame-app run-remote-app
+#dev: run-signaling-server run-frame-app run-remote-app
+
+dev: run-signaling-server

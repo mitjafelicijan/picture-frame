@@ -2,6 +2,7 @@
 
 1. [Local development](#local-development)
 2. [Android](#android)
+   1. [WebView versions](#webview-versions)
 3. [Resources](#resources)
 
 ## Local development
@@ -17,8 +18,8 @@ make dev
 ```
 
 - Signaling server (http://localhost:3000)
-- Picture Frame interface for tablet (http://localhost:3001)
-- Remote app for phone (http://localhost:3002)
+- Picture Frame interface for tablet
+- Remote app for phone
 
 ## Android
 
