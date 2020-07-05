@@ -2,12 +2,29 @@
 <html lang="en">
 
   <head>
-    <meta charset="UTF-8">
+    <meta charset="utf-8">
     <meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1, maximum-scale=1">
-    <title>Document</title>
+
+    <title>Remote</title>
+    <link rel="stylesheet" href="/apps/remote/assets/reset.css">
   </head>
 
   <body>
+
+    <app></app>
+
+    <script src="/apps/remote/tags/application.tag" type="riot"></script>
+    <script src="/apps/remote/tags/pairing.tag" type="riot"></script>
+    <script src="/apps/remote/tags/control.tag" type="riot"></script>
+
+    <script src="/apps/remote/assets/html5-qrcode.min.js"></script>
+    <script src="https://unpkg.com/peerjs@1.2.0/dist/peerjs.min.js"></script>
+    <script src="https://unpkg.com/dexie@3.0.1/dist/dexie.js"></script>
+    <script src="https://unpkg.com/riot@4.12.2/riot+compiler.min.js"></script>
+    <script src="https://unpkg.com/@riotjs/route@5.3.2/route.js"></script>
+
+    <script src="/apps/remote/config.js"></script>
+    <script src="/apps/remote/assets/app.js"></script>
 
   </body>
 

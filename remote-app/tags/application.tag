@@ -1,19 +1,31 @@
 <app>
 
   <router>
-    <route path="/apps/frame/#/"></route>
-    <route path="/apps/frame/#/pairing">
+    <route path="/apps/remote/#/"></route>
+    <route path="/apps/remote/#/pairing">
       <pairing></pairing>
     </route>
-    <route path="/apps/frame/#/picture-frame">
-      <pictureFrame></pictureFrame>
+    <route path="/apps/remote/#/control">
+      <control></control>
     </route>
   </router>
 
   <script>
     export default {
       async onMounted() {
-        let deviceID = null;
+        window.remoteDeviceID = null;
+        if (await db.config.where('key').equals('remoteDeviceID').count() === 0) {
+          route.router.push(`${pathPrefix}#/pairing`);
+        } else {
+          const existingDeviceID = await db.config.where('key').equals('remoteDeviceID').toArray();
+          window.remoteDeviceID = existingDeviceID[0].value;
+          route.router.push(`${pathPrefix}#/control`);
+        }
+
+
+
+
+        /*let deviceID = null;
 
         // generates new device id if non exist
         if (await db.config.where('key').equals('deviceID').count() === 0) {
@@ -66,7 +78,7 @@
               route.router.push(`${pathPrefix}#/picture-frame`);
             }
           });
-        });
+        });*/
       },
 
     }

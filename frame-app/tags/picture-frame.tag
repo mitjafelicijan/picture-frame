@@ -12,7 +12,7 @@
 
   <script>
     export default {
-      async onMounted() {
+      async loadImageStripFromDatabase() {
         let pictures = await db.pictures.toArray();
         if (pictures.length > 0) {
           this.update({
@@ -22,8 +22,19 @@
         }
       },
 
+      async onMounted() {
+        this.loadImageStripFromDatabase();
+      },
+
+      async onUpdated(props, state) {
+        //this.loadImageStripFromDatabase();
+        //this.picture.blob = evt.target.src
+      },
+
       async showFullImage(evt) {
         this.update({ featured: evt.target.src });
+
+        //this.picture.blob = evt.target.src
       },
     }
   </script>

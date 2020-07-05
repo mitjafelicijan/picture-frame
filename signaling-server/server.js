@@ -1,6 +1,6 @@
 const path = require('path');
 const express = require('express');
-const peer= require('peer');
+const peer = require('peer');
 const chalk = require('chalk');
 const datastore = require('nedb');
 const cors = require('cors');
@@ -25,6 +25,9 @@ const peerServer = peer.ExpressPeerServer(httpServer, {
 app.use(cors());
 app.use('/rtc', peerServer);
 
+app.use('/apps/frame', express.static('../frame-app'));
+app.use('/apps/remote', express.static('../remote-app'));
+
 app.get('/generate-device-id', async (req, res) => {
   db.insert({ header: req.headers }, (error, document) => {
     return res.send(document._id);
@@ -32,7 +35,10 @@ app.get('/generate-device-id', async (req, res) => {
 });
 
 app.get('/', async (req, res) => {
-  res.send('Signaling server');
+  res.send(`
+    <li><a href="/apps/frame/">frame</li>
+    <li><a href="/apps/remote/">remote</li>
+  `);
 });
 
 peerServer.on('connection', (client) => {
