@@ -28,6 +28,9 @@
         image.onload = () => {
           let width = image.width;
           let height = image.height;
+          
+          console.log('width', width);
+          console.log('height', height);
 
           if (width <= maxWidth && height <= maxHeight) {
             resolve(file);
@@ -37,22 +40,52 @@
           let newHeight;
 
           if (width > height) {
-            newHeight = height * (maxWidth / width);
+            newHeight = Math.round(height * (maxWidth / width));
             newWidth = maxWidth;
           } else {
-            newWidth = width * (maxHeight / height);
+            newWidth = Math.round(width * (maxHeight / height));
             newHeight = maxHeight;
           }
-
+          
+          console.log('newWidth', newWidth);
+          console.log('newHeight', newHeight);
+          
           let canvas = document.createElement('canvas');
-          canvas.width = newWidth;
-          canvas.height = newHeight;
-
-          let context = canvas.getContext('2d');
-          context.drawImage(image, 0, 0, newWidth, newHeight);
           
           if (newWidth > newHeight) {
-            context.rotate(180 * Math.PI / 180);
+          	console.log('should rotate');
+          	
+            canvas.width = newHeight;
+            canvas.height = newWidth;
+            
+            let context = canvas.getContext('2d');
+            
+            // translate to center-canvas 
+            // the origin [0,0] is now center-canvas
+            context.translate(canvas.width / 2, canvas.height / 2);
+            
+            // roate the canvas by +90% (==Math.PI/2)
+            context.rotate(Math.PI / 2);
+            
+            // draw the signature
+            // since images draw from top-left offset the draw by 1/2 width & height
+            context.drawImage(image, -newWidth / 2, -newHeight / 2, newWidth, newHeight);
+            
+            // un-rotate the canvas by -90% (== -Math.PI/2)
+            context.rotate(-Math.PI / 2);
+
+            // un-translate the canvas back to origin==top-left canvas
+            context.translate(-canvas.width / 2, -canvas.height / 2);
+            
+          } else {
+            console.log('no rotation reuired');
+            
+            canvas.width = newWidth;
+            canvas.height = newHeight;
+            
+            let context = canvas.getContext('2d');
+            
+            context.drawImage(image, 0, 0, newWidth, newHeight);
           }
           
           canvas.toBlob(resolve, file.type);
