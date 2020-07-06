@@ -21,7 +21,7 @@
       });
     };
 
-    const resizeImage = (file, maxWidth, maxHeight) => {
+    const processImage = (file, maxWidth, maxHeight) => {
       return new Promise((resolve, reject) => {
         let image = new Image();
         image.src = URL.createObjectURL(file);
@@ -50,6 +50,11 @@
 
           let context = canvas.getContext('2d');
           context.drawImage(image, 0, 0, newWidth, newHeight);
+          
+          if (newWidth > newHeight) {
+            context.rotate(180 * Math.PI / 180);
+          }
+          
           canvas.toBlob(resolve, file.type);
         };
         image.onerror = reject;
@@ -81,7 +86,7 @@
           conn.on('open', async () => {
             try {
               const file = event.target.files[0];
-              resizeImage(file, 960, 600).then(async (blob) => {
+              processImage(file, 600, 960).then(async (blob) => {
                 const payload = {
                   blob: await blobToBase64(blob),
                   filename: file.name,
