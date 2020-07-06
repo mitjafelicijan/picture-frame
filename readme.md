@@ -11,7 +11,10 @@ Requires Node.JS 10.x or greater.
 
 ```bash
 # install dependencies
-cd signaling server && npm install && sudo npm i -G http-server
+cd signaling-server && npm install
+
+#optional but not needed if you have a server
+sudo npm i -G http-server
 
 # starts stack
 make dev
