@@ -20,15 +20,27 @@ public class MainActivity extends AppCompatActivity {
 
   private WebView frameWebView;
 
+  private int currentApiVersion;
+
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
 
-    // https://www.apkmirror.com/apk/google-inc/android-system-webview/android-system-webview-83-0-4103-60-release/android-system-webview-83-0-4103-60-2-android-apk-download/download/
-    // enables remote debugging of webview with devtools
-    // open chrome and chrome://inspect/#devices and inspect webview
+    // keep screen on
+    getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+
+    currentApiVersion = android.os.Build.VERSION.SDK_INT;
+
+
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+      // https://www.apkmirror.com/apk/google-inc/android-system-webview/android-system-webview-83-0-4103-60-release/android-system-webview-83-0-4103-60-2-android-apk-download/download/
+      // enables remote debugging of webview with devtools
+      // open chrome and chrome://inspect/#devices and inspect webview
       WebView.setWebContentsDebuggingEnabled(true);
+
+      // hack around to hide the ui
+      hideSystemUI();
+
     }
 
 
@@ -52,10 +64,17 @@ public class MainActivity extends AppCompatActivity {
     }
   }
 
+  @Override
+  public void onResume(){
+    super.onResume();
+    hideSystemUI();
+
+  }
+
   private void hideSystemUI() {
     View decorView = getWindow().getDecorView();
     decorView.setSystemUiVisibility(
-      View.SYSTEM_UI_FLAG_IMMERSIVE
+      View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
         | View.SYSTEM_UI_FLAG_LAYOUT_STABLE
         | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
         | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
@@ -63,19 +82,20 @@ public class MainActivity extends AppCompatActivity {
         | View.SYSTEM_UI_FLAG_FULLSCREEN);
   }
 
-  private void showSystemUI() {
-    View decorView = getWindow().getDecorView();
-    decorView.setSystemUiVisibility(
-      View.SYSTEM_UI_FLAG_LAYOUT_STABLE
-        | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
-        | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);
-  }
+//  private void showSystemUI() {
+//    View decorView = getWindow().getDecorView();
+//    decorView.setSystemUiVisibility(
+//      View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+//        | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+//        | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);
+//  }
 
   private void loadSPAIntoWebView () {
 
     frameWebView = new WebView(this);
     //frameWebView.loadUrl("https://html5test.com/");
-    frameWebView.loadUrl("https://pictureframe.ngrok.io");
+    //frameWebView.loadUrl("https://pictureframe.ngrok.io");
+    frameWebView.loadUrl("https://st.u-centrix.com:5678/apps/frame/#/");
 
     // dirty fix so webview doesn't open Chrome on refresh
     frameWebView.setWebViewClient(new WebViewClient());
